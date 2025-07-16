@@ -1,1 +1,1 @@
-web: gunicorn diabetes_flask_app: app
+web: gunicorn diabetes_flask_app:app
