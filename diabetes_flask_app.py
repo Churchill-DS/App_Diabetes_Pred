@@ -1,4 +1,6 @@
+import numpy as np
 from flask import Flask, request, jsonify, render_template_string
+import os
 
 # --- Flask app ---
 app = Flask(__name__)
@@ -17,6 +19,9 @@ form_html = """
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
+            /* IMPORTANT: Replace this placeholder URL with the actual public URL of your background image.
+               If serving statically from Flask, place the image in 'static/images/' and use url('/static/images/your_image_name.png') */
+            background-image: url('https://placehold.co/1200x675/E0F2FE/4F46E5?text=Diabetes+Background'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -82,7 +87,7 @@ form_html = """
                     <input type="number" step="any" id="{{col}}" name="{{col}}" required
                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
-            {% end for %}
+            {% endfor %} {# Corrected: Changed {% end for %} to {% endfor %} #}
             <button type="submit"
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Predict
@@ -99,7 +104,7 @@ form_html = """
             <div class="error-message">
                 <p class="text-red-700">{{ error }}</p>
             </div>
-        {% endif %}
+        {% endif %} {# Corrected: Changed {% endfor %} to {% endif %} #}
     </div>
 </body>
 </html>
@@ -168,4 +173,3 @@ def predict():
 if __name__ == '__main__':
     # No need to check for model directory if model/scaler are not used
     app.run(host='0.0.0.0', port=5000, debug=False)
-
